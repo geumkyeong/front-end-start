@@ -1,24 +1,22 @@
-var x = 0;
-var y = 0;
+//1부터 100까지 더하기
+var sum = 0;
 
-for(y = 1; y <= 100; y++){
-    x += y;
+for(var i = 0; i <= 100; i++){
+    sum += i;
 }
-console.log(x);
 
-for(y = 0; y <= 100; y++){
-    if(y%2==1){
-        console.log(y+"는 홀수입니다");
+console.log(sum);
+
+//홀수 출력하기(0~100)
+for(var i = 0; i <= 100; i++){
+    if(i % 2 == 1){
+        console.log(i);
     }
 }
 
-
-for(x = 2; x <= 9; x++){
-    for(y = 1; y <= 9; y++) {
-        
-        console.log(x + "x"+ y +"="+(x*y));
+//구구단
+for(var x = 2; x <= 9; x++){
+    for(var y = 1; y <= 9; y++){
+       console.log(x + "x" + y + "=" + (x * y));
     }
 }
-
-
-
