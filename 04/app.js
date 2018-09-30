@@ -4,13 +4,12 @@ var str = '';
 
 for (let i = 1; i <= 4; i++) {
     for (let j = 1; j <= 4; j++) {
-        // let block = document.createElement('div');
-        // block.className = (i + j) % 2 == 1 ? 'b' : 'w';
-        // wrap.appendChild(block);
-        str += `<div class='${(i + j) % 2 == 1 ? 'b' : 'w'}'></div>`;
+        // 매번 className 바꾸면서 문자열에 div 태그 추가하기
+        var className = (i + j) % 2 == 1 ? 'b' : 'w';
+        str += '<div class="'+ className +'"></div>';
     }
 }
-
+//한번에 div 태그 추가
 wrap.innerHTML = str;
 
 var blocks = document.querySelectorAll('.wrap > div'); // 모든 block을 가져옴
