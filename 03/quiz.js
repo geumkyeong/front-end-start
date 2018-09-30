@@ -9,51 +9,67 @@ var todayPhoto = [
     ,{"url":"http://sports.media.daum.net/general/gallery/STARKIMYUNA/index.html","img":"http://icon.daumcdn.net/w/c/12/05/81727815537682839.jpeg","title":"&#39;교생&#39; 김연아, 스승의날에도 인기폭발","id":"20120516092003892"}
 ];
 
+
 var wrap = document.getElementById('wrap');
-var page = 1;
+var prev = document.getElementById('prev');
+var next = document.getElementById('next');
+var index = document.getElementById('index'); 
 
 var start = 0;
-var pageCount = 3;
-var end = start + pageCount;
+var end = 3;
+var page = 1;
+var pageCount = 3; // 한번에 보여질 page 개수
 
-function getStartIndex(page) {
-    // if(page === 1) return 0;
-    // else if(page === 2) return 3;
-    // else if(page === 3) return 6;
+function getStartIndex(page){
     return (page - 1) * pageCount;
 }
 
-showPages(page); //처음 페이지 보여주기
-
-function plusPage(n){ // prev, next
-    showPages(page += n);
-}
-
-function movePage(n){ //index 따른 page 이동
-    showPages(page = n);
-}
-
-function showPages(n){
-    start = getStartIndex(n);
-
-    if (n > 3) {page = 1}; // 3p -> 1p
-    if(start >= 9) start = 0; // index 9 -> index 0
-
-    if (n < 1) {page = 3}; // 1p -> 3p
-    if(start < 0) start = 6; // index 0 -> index 6
+function initIndex(page){
+    start = getStartIndex(page);
     end = start + 3;
-    controlPages(start, end);
+    if(start == 6) end = start + 2; //예외
 }
 
-function controlPages(start, end){
+prev.addEventListener('click', function(){
+    page--;
+    if(page == 0) page = 3; // init page
+    index.innerHTML = page + ' / 3'; // 현재 페이지
+    console.log('(prev) ' + page);
+    initIndex(page);
+    showPage(todayPhoto, start, end);
+});
+
+next.addEventListener('click', function(){
+    page++;
+    if(page == 4) page = 1; // init page
+    index.innerHTML = page + ' / 3'; // 현재 페이지
+    console.log('(next) ' + page);
+    initIndex(page);
+    showPage(todayPhoto, start, end);
+});
+
+function showPage(todayPhoto, start, end){
     var str = '';
-    for(var i= start; i < end; i++){
-        if(i==8) continue;
-        if(i==9) continue;
-        str += '<img src="'+todayPhoto[i].img+'"> ';
-    }
     
-    wrap.innerHTML = str;
+    for(var i = start; i < end; i++){
+        str += '<div id="box"><img src="'+todayPhoto[i].img+'"><BR><strong>'+todayPhoto[i].title+'</strong></div> ';
+    }
+
+    wrap.innerHTML = '<center>'+str+'</center>';
 }
 
+showPage(todayPhoto, start, end);
+
+
+var box = '#box { display: inline-block; text-align: center; width: 120px; }';
+
+var head = document.querySelector('head');
+var style = document.createElement('style');
+style.innerHTML = box;
+head.appendChild(style);
+
+var slide = document.getElementById('slide');
+
+slide.style.textAlign = "center";
+slide.style.margin = "15px 0 15px 0";
 
