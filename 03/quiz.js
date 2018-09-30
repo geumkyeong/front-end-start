@@ -13,7 +13,7 @@ var todayPhoto = [
 var wrap = document.getElementById('wrap');
 var prev = document.getElementById('prev');
 var next = document.getElementById('next');
-var index = document.getElementById('index'); 
+var index = document.getElementById('index'); // view current page
 
 var start = 0;
 var end = 3;
@@ -24,7 +24,7 @@ function getStartIndex(page){
     return (page - 1) * pageCount;
 }
 
-function initIndex(page){
+function setIndex(page){
     start = getStartIndex(page);
     end = start + 3;
     if(start == 6) end = start + 2; //예외
@@ -32,19 +32,17 @@ function initIndex(page){
 
 prev.addEventListener('click', function(){
     page--;
-    if(page == 0) page = 3; // init page
-    index.innerHTML = page + ' / 3'; // 현재 페이지
-    console.log('(prev) ' + page);
+    if(page == 0) page = 3; // set last page
+    index.innerHTML = page + ' / 3'; // set current page
     initIndex(page);
     showPage(todayPhoto, start, end);
 });
 
 next.addEventListener('click', function(){
     page++;
-    if(page == 4) page = 1; // init page
-    index.innerHTML = page + ' / 3'; // 현재 페이지
-    console.log('(next) ' + page);
-    initIndex(page);
+    if(page == 4) page = 1; // set first page
+    index.innerHTML = page + ' / 3'; // set current page
+    setIndex(page);
     showPage(todayPhoto, start, end);
 });
 
@@ -52,24 +50,10 @@ function showPage(todayPhoto, start, end){
     var str = '';
     
     for(var i = start; i < end; i++){
-        str += '<div id="box"><img src="'+todayPhoto[i].img+'"><BR><strong>'+todayPhoto[i].title+'</strong></div> ';
+        str += '<div><img src="'+todayPhoto[i].img+'"><BR><strong>'+todayPhoto[i].title+'</strong></div> ';
     }
 
-    wrap.innerHTML = '<center>'+str+'</center>';
+    wrap.innerHTML = '<center>' + str + '</center>';
 }
 
 showPage(todayPhoto, start, end);
-
-
-var box = '#box { display: inline-block; text-align: center; width: 120px; }';
-
-var head = document.querySelector('head');
-var style = document.createElement('style');
-style.innerHTML = box;
-head.appendChild(style);
-
-var slide = document.getElementById('slide');
-
-slide.style.textAlign = "center";
-slide.style.margin = "15px 0 15px 0";
-
