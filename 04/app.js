@@ -1,22 +1,15 @@
 var wrap = document.querySelector('.wrap');
 
 var str = '';
-for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
-        if(i%2==0){
-            if(j%2==0){
-                str += '<div class="b"></div>';
-            } else {
-                str += '<div class="w"></div>';
-            }
-        } else {
-            if(j%2==1){
-                str += '<div class="b"></div>';
-            } else {
-                str += '<div class="w"></div>';
-            }
-        }
+
+//var 변수 재선언, 재할당 O, let 변수 재선언 X 재할당 O, const 변수 재선언, 재할당 X
+
+for (let i = 1; i <= 4; i++) {
+    for (let j = 1; j <= 4; j++) {
+        let block = document.createElement('div');
+        block.className = (i + j) % 2 == 1 ? 'b' : 'w';
+        wrap.appendChild(block);
     }
 }
 
-wrap.innerHTML = str;
+// wrap.innerHTML = str;
