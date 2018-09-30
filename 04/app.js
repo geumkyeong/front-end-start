@@ -12,3 +12,21 @@ for (let i = 1; i <= 4; i++) {
 }
 
 wrap.innerHTML = str;
+
+var blocks = document.querySelectorAll('.wrap > div'); // 모든 block을 가져옴
+
+// for(var i=0; i < 16; i++) {
+//     console.log( blocks[i] );
+//     blocks[i].addEventListener('click', function(event) {
+//         debugger
+//         blocks[i].style.backgroundColor = 'yellow';
+//     });
+// }
+
+blocks.forEach(function(block){ // 각 요소에 이벤트 리스너 추가
+    //block 요소를 클릭하면 함수가 실행되고 event인자가 넘어온다.
+    block.addEventListener('click', function(event){ // event: MouseEvent{ target: div.w, type: "click" }
+        console.log(block); // <div class="w" style="background-color: yellow;"></div>
+        block.style.backgroundColor = 'yellow';
+    })
+});
