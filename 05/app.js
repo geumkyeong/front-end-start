@@ -4,6 +4,6 @@ fetch('./data.json')
 .then(function(response){
     response.json().then(function(data){
         console.log('json data: ', data);
-        //json data:  {name: "MGG", onsen: "tamago"}
+        document.getElementById('name').innerHTML = data.name;
     });
 });
