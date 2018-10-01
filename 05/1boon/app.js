@@ -1,10 +1,21 @@
 console.log('1boon');
 
-var url = 'https://1boon.kakao.com/ch/enter.json?page=2&pagesize=15';
+var wrap = document.getElementById('wrap');
+var btn = document.getElementById('btn');
 
-getUrlData(url, function(json){
+var page = 1;
+var pageCount = 20;
+
+var url = 'https://1boon.kakao.com/ch/enter.json?page='+ page +'&pagesize=' + pageCount + '';
+
+function setPage(){
+    page++;
+    url = 'https://1boon.kakao.com/ch/enter.json?page='+ page +'&pagesize=' + pageCount + '';
+}
+
+function board(json){
     console.log(json);
-
+    
     var str = '';
     
     for(var i = 0; i < json.data.length; i++){
@@ -13,8 +24,10 @@ getUrlData(url, function(json){
 
         str += '<a href="https://1boon.kakao.com/' + path + '">' + title + '</a><BR>';
     }
-    document.getElementById('wrap').innerHTML = str;
-})
+    wrap.innerHTML = str;
+}
+
+getUrlData(url, board)
 
 function getUrlData(url, callback){
     fetch(url)
@@ -27,3 +40,8 @@ function getUrlData(url, callback){
         console.log('Fetch Error :-S', err);
     });
 }
+
+btn.addEventListener('click', function(event){
+    setPage(); // 더보기 눌렀을 때
+    getUrlData(url, board); // 다음 페이지 보이기
+});
