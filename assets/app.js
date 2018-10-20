@@ -1,3 +1,39 @@
+var channel = 'trending';
+var page = 1;
+var pageCount = 20;
+var url = `https://1boon.kakao.com/ch/enter.json?pagesize=${pageCount}&page=${page}`;
+
+//List
+var list = document.getElementById('list');
+
+function board(json) {
+    var str = '';
+    
+    for(var i = 0; i < json.data.length; i++){
+        var title = json.data[i].title;
+        var path = json.data[i].path;
+
+        str += `<a href="https://1boon.kakao.com/${path}">${title}</a><BR>`;
+    }
+
+    list.innerHTML = str;
+}
+
+getUrlData(url, board);
+
+function getUrlData(url, callback) {
+    fetch(url)
+    .then(function(response){
+        response.json().then(function(data){
+            //console.log('json: ', data);
+            callback(data)
+        });
+    })
+    .catch(function(err){
+        console.log('Fetch Error :-S', err);
+    });
+}
+
 // Nav-bar action
 var clicked = document.querySelector('.active');//이미 클릭된 요소
 var lies = document.querySelectorAll('.nav > li');
