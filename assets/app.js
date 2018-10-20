@@ -1,7 +1,13 @@
 var channel = 'trending';
 var page = 1;
 var pageCount = 20;
-var url = `https://1boon.kakao.com/ch/enter.json?pagesize=${pageCount}&page=${page}`;
+var url = `https://1boon.kakao.com/ch/${channel}.json?pagesize=${pageCount}&page=${page}`;
+
+
+function setUrl(aTag) {
+    channel = document.getElementById(aTag).id;
+    url = `https://1boon.kakao.com/ch/${channel}.json?pagesize=${pageCount}&page=${page}`;
+}
 
 //List
 var list = document.getElementById('list');
@@ -49,4 +55,7 @@ function onClick() {
     
     var click = event.currentTarget; //이벤트가 바인딩된 요소
     click.className = 'active';
+
+    setUrl(event.target.id);
+    getUrlData(url, board);
 }
