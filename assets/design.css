@@ -1,0 +1,62 @@
+a, body, html{ 
+    font-family: "Nanum Gothic", sans-serif !important;
+    font-size: 14px;
+    height: 100%; 
+    margin: 0;
+    
+    color: #333;
+}
+
+.container {
+    height: 100%;
+}
+
+a:hover{
+    opacity: .7;
+    color: #333;
+    text-decoration: none;
+}
+
+#list {
+    height: auto;
+    overflow: hidden;
+    min-height: 100px;
+    padding-top: 10px;
+}
+
+.conList {
+    width: 240px;
+    height: 340px;
+    display: block;
+    position: relative;
+    float: left;
+    padding: 40px 28px;
+    margin-top: 0px;
+    border-bottom: 1px solid #f5f6f7;
+    border-right: 1px solid #f5f6f7;
+}
+
+.containImg, .conImg, .conTitle {
+    display: block;
+    width: 100%;
+}
+
+.containImg {
+    height: 120px;
+    margin: 0 auto;
+}
+
+.conImg {
+    height: 100%;
+    opacity: 1;
+}
+
+
+.conTitle {
+    height: 56px;
+    margin-top: 20px;
+}
+
+.conTotal {
+    margin-top: 35px;
+}
