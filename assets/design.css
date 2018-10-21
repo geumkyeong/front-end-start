@@ -11,6 +11,10 @@ a, body, html{
     height: 100%;
 }
 
+.container > .text-center {
+    margin-bottom: 35px;
+}
+
 a:hover{
     opacity: .7;
     color: #333;
@@ -21,7 +25,11 @@ a:hover{
     height: auto;
     overflow: hidden;
     min-height: 100px;
-    padding-top: 10px;
+    margin-bottom: 35px;
+}
+
+.loading {
+    display: none;
 }
 
 .conList {
@@ -31,7 +39,6 @@ a:hover{
     position: relative;
     float: left;
     padding: 40px 28px;
-    margin-top: 0px;
     border-bottom: 1px solid #f5f6f7;
     border-right: 1px solid #f5f6f7;
 }
@@ -51,12 +58,26 @@ a:hover{
     opacity: 1;
 }
 
-
 .conTitle {
-    height: 56px;
-    margin-top: 20px;
+    height: 40px;
+    margin: 20px 0 35px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-.conTotal {
-    margin-top: 35px;
+.glyphicon-refresh {
+    -animation: rotate .7s infinite linear;
+    -webkit-animation: gooRotate .7s infinite linear;
+}
+
+@keyframes rotate {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+@-webkit-keyframes gooRotate {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
 }

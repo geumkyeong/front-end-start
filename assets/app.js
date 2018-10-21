@@ -1,25 +1,27 @@
-var channel = 'trending';
+var channel = 'trending'; //category
 var page = 1;
 var pageCount = 20;
 var url = `https://1boon.kakao.com/ch/${channel}.json?pagesize=${pageCount}&page=${page}`;
 
 var str = '';
-var btn = document.querySelector('.btn');
+var btn = document.querySelector('.btn'); //더보기 button.
 
-function btnClick() {
-    page++;
-    setUrl();
-    getUrlData(url, board);
+function btnClick() { //더보기
+    page++; //Change page
+    setUrl(); //Setting
+    setTimeout(function(){ getUrlData(url, board) }, 150); //Loading data.
+    loading.style.display = 'block'; //Show loder
 }
 
-function setUrl() {
+function setUrl() { //url Setting.
     url = `https://1boon.kakao.com/ch/${channel}.json?pagesize=${pageCount}&page=${page}`;
 }
 
-btn.addEventListener('click', btnClick);
+btn.addEventListener('click', btnClick); //이벤트 리스너 추가
 
 //List
 var list = document.getElementById('list');
+var loading = document.querySelector('.loading'); //Loader in div(.loding) element.
 
 function board(json) {
     for(var i = 0; i < json.data.length; i++){
@@ -33,14 +35,15 @@ function board(json) {
                 <img src="${coverImage}" class="conImg" alt="">
             </span>
             <strong class="conTitle">${title}</strong>
-            <span class="conTotal">${totalView} 읽음</span>
+            <span class="conTotal">${totalView.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 읽음</span>
         </a><BR>`;
     }
 
-    list.innerHTML = str;
+    list.innerHTML = str; //Show loaded data
+    loading.style.display = 'none'; //if load completed? Hidden loader.
 }
 
-getUrlData(url, board);
+getUrlData(url, board); //Fetch data.
 
 function getUrlData(url, callback) {
     fetch(url)
@@ -56,45 +59,24 @@ function getUrlData(url, callback) {
 }
 
 // Nav-bar
-var clicked = document.querySelector('.active'); //클릭된 요소
-var lies = document.querySelectorAll('.nav > li');
+var clicked = document.querySelector('.active'); //actived element. 
+var lies = document.querySelectorAll('.nav > li'); //LI elements in Nav-bar.
 
 lies.forEach(function(li){ // 각 요소에 이벤트 리스너 추가
-    //li 요소를 클릭하면 함수가 실행되고 event인자가 넘어온다.
     li.addEventListener('click', onClick)
+    //li 요소를 클릭하면 함수가 실행되고 event인자가 넘어온다.
 });
 
-function onClick() {
-    str = ''; page = 1; //list 초기화
-    channel = document.getElementById(event.target.id).id; //a-tag의 id가져오기
+function onClick() {    //change channel
+    str = ''; page = 1; //data-list 초기화
+    channel = document.getElementById(event.target.id).id; //A-tag의 ID가져오기
 
-    clicked = document.querySelector('.active');
-    clicked.className = clicked.className.replace(/\bactive\b/g, '');
+    clicked = document.querySelector('.active'); //actived element.
+    clicked.className = clicked.className.replace(/\bactive\b/g, ''); //Change className (active -> '')
     
     var click = event.currentTarget; //이벤트가 바인딩된 요소
-    click.className = 'active';
+    click.className = 'active'; //Change className.
 
-    setUrl();
-    getUrlData(url, board);
+    setUrl(); //Setting
+    getUrlData(url, board); //Fetch data.
 }
-
-//Scroll-bar
-
-// var $window = $(window);
-// var $glyphicon = $('.glyphicon')
-
-// function checkScroll(event) {
-//   var scrollTop = $window.scrollTop();
-//   var 업버튼이_보여질_포지션 = 100;
-
-//   if(scrollTop > 업버튼이_보여질_포지션) {
-//     $glyphicon.fadeIn();
-//   }
-// }
-// function goTop(){
-//   // $window.scrollTop(0); 
-//   $( 'html, body' ).animate( { scrollTop : 0 }, 400 )
-// }
-
-// $window.on('scroll', checkScroll);
-// $glyphicon.click(goTop);
