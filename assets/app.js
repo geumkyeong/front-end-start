@@ -36,7 +36,7 @@ function board(json) {
             </span>
             <strong class="conTitle">${title}</strong>
             <span class="conTotal">${totalView.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 읽음</span>
-        </a><BR>`;
+        </a>`;
     }
 
     list.innerHTML = str; //Show loaded data

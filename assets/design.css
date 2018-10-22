@@ -33,11 +33,11 @@ a:hover{
 }
 
 .conList {
+    display: block;
+    float: left;
+    position: relative;
     width: 240px;
     height: 340px;
-    display: block;
-    position: relative;
-    float: left;
     padding: 40px 28px;
     border-bottom: 1px solid #f5f6f7;
     border-right: 1px solid #f5f6f7;
