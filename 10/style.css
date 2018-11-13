@@ -1,16 +1,25 @@
+
 .box {
-    border: 1px solid black;
-    width: 400px;
-    height: 400px;
-    position: relative;
-    overflow: hidden;
-  }
-  #bug {
-    width:20px;
-    height: 20px;
-    background-color: red;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    cursor: pointer;
-  }
+  border: 1px solid black;
+  width: 400px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+#bug {
+  width:20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  cursor: pointer;
+}
+.wrap {
+  margin: 10px auto;
+  width: 500px;
+  
+}
+#score , #life {
+  color: blue;
+}
