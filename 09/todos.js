@@ -8,7 +8,7 @@ var index = 1;
 function addTodo(e) {
     var todo = input.value;
     insertTodo(todo);
-    removeList(board);
+    removeList(removeMetch);
     input.value = '';
     e.preventDefault();
 }
@@ -20,7 +20,7 @@ function insertTodo(todo){
     var html = `
         <button class="delete" id="${index}">×</button>
         <input type="checkbox" class="toggle-checked">
-        <span class="text">${todo}</span>
+        <label class="text">${todo}</label>
     `;
     
     li.innerHTML = html;
@@ -31,15 +31,13 @@ function insertTodo(todo){
 // input.addEventListener('keydown', addTodo);
 form.addEventListener('submit', addTodo);
 
-function board(e) {
+function removeMetch(e) {
     var lis = document.querySelectorAll('li');
     // console.log(e.target.id);
     lis.forEach(function(li){
         if(li.id == e.target.id)
             li.parentNode.removeChild(li);
     });
-    
-    
 }
 
 function removeList(callback) {
@@ -51,15 +49,3 @@ function removeList(callback) {
         })
     });
 }
-
-
-var checks = document.querySelectorAll('.toggle-checked');
-checks.forEach(function(check){
-    check.addEventListener('check', function(){
-        check.checked = true;
-        var span = document.querySelector('span');
-        if(check.checked == true) span.style.textDecoration = 'line-through';
-        else span.style.textDecoration = 'none';
-    })
-});
-
