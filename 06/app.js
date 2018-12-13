@@ -1,36 +1,40 @@
 console.log('app');
-var appkey = 'b5f22ee8a7db9f54f69151f66c92861d';
-var btn = document.getElementById("btn");
-var search = document.getElementById("search");
+var appkey = '51604d09a58cd5bad7216542b64809f9';
 
+var pageCount = 10;
+var query = '제주대';
+var url = `https://dapi.kakao.com/v2/search/web?query=${query}&size=${pageCount}`;
 
 var myHeaders = new Headers(); //헤더라는 객체로 헤더를 만듬
-myHeaders.append("Authorization", "KakaoAK b5f22ee8a7db9f54f69151f66c92861d");
+myHeaders.append('Authorization', 'KakaoAK 51604d09a58cd5bad7216542b64809f9');
 var options = {
-    headers : myHeaders
+    headers: myHeaders
 };//header 넘김
 
-function searching(keyword) {
-    var url = `https://dapi.kakao.com/v2/search/web?query=${keyword}`;
-    getUrlData(url, options, board);
-}
+var wrap = document.getElementById('wrap');
+var btn = document.getElementById("btn");
+var search = document.getElementById('search');
 
-function board (json){
+function board(json) {
     console.log(json);
 
     var str = '';
-    for(var i = 0; i < json.data.length; i++){
-        var title = json.data[i].title;
-        var path = json.data[i].path;
-        str += '<a href="'+ path +'">' + title + '</a><BR>';
+    for(var i = 0; i < json.documents.length; i++){
+        var title = json.documents[i].title;
+        var path = json.documents[i].url;
+        str += `<a href="${path}">${title}</a><BR>`;
     }
     wrap.innerHTML = str;
 }
 
-function getUrlData(url, options, callback){
-    fetch(url, options).then(function(response){
-        response.json().then(function(data){
-            callback(data)
+getUrlData(query, options, board)
+
+function getUrlData(query, options, callback) {
+    url = `https://dapi.kakao.com/v2/search/web?query=${query}&size=${pageCount}`;
+
+    fetch(url, options).then(function(response) {
+        response.json().then(function(data) {
+            callback(data);
         });
     })
     .catch(function(err){
@@ -38,7 +42,7 @@ function getUrlData(url, options, callback){
     });
 }
 
-btn.addEventListener('click', function(event){
-    var keyword = search.value;
-    searching(keyword);
+btn.addEventListener('click', function(){
+    query = search.value;
+    getUrlData(query, options, board);
 });
